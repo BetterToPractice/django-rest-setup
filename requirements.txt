@@ -1,0 +1,5 @@
+Django==4.2.3
+djangorestframework==3.14.0
+
+Sphinx==7.0.1
+sphinx-rtd-theme==1.2.2
