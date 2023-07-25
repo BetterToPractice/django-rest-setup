@@ -1,5 +1,3 @@
 app_name = "users"
 
-urlpatterns = [
-
-]
+urlpatterns = []
