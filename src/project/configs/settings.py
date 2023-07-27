@@ -141,3 +141,9 @@ REST_FRAMEWORK = {
     "SEARCH_PARAM": "q",
     "ORDERING_PARAM": "ordering",
 }
+
+
+# Celery
+#
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
