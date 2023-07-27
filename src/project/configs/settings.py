@@ -1,15 +1,24 @@
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
+
+# Django Environ
+# https://django-environ.readthedocs.io/en/latest/quickstart.html
+
+env = environ.Env()
+environ.Env.read_env(ROOT_DIR / ".env")
 
 
-SECRET_KEY = "django-insecure-&e5wz+@w%o5+azpd01^)o4k=hqzb4*qernb%if$^sigwd(^qmq"
+SECRET_KEY = env.str("SECRET_KEY")
+DEBUG = env.bool("DEBUG", default=False)
 
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[
+    'localhost:8000',
+    'localhost:3000',
+])
 
 
 # Application definition
@@ -65,10 +74,7 @@ WSGI_APPLICATION = "configs.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": env.db(),
 }
 
 
@@ -146,6 +152,7 @@ REST_FRAMEWORK = {
 
 
 # Celery
-#
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html
+
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", default="")
+CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND", default="")
