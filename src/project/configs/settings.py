@@ -23,9 +23,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.users",
     "apps.auths",
-
     # third-party
     "corsheaders",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -118,8 +118,26 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Cors
 # https://pypi.org/project/django-cors-headers/
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost:3000",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+# Rest Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {
+    # pagination
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 25,
+    # Search
+    "DEFAULT_FILTER_BACKENDS": (
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ),
+    "SEARCH_PARAM": "q",
+    "ORDERING_PARAM": "ordering",
+}
