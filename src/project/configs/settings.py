@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "django_filters",
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     # pagination
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 25,
@@ -156,3 +158,13 @@ REST_FRAMEWORK = {
 
 CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", default="")
 CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND", default="")
+
+# DRF Spectacular
+# https://drf-spectacular.readthedocs.io/en/latest/readme.html
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Project API',
+    'DESCRIPTION': 'project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
