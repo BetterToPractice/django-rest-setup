@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     'drf_spectacular',
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,10 @@ DATABASES = {
 
 
 AUTH_USER_MODEL = "users.User"
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.google.GoogleOAuth2",
+]
 
 
 # Password validation
@@ -168,3 +173,9 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+# Social auth Django
+# https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+SOCIAL_AUTH_JSONFIELD_ENABLED = env.str("SOCIAL_AUTH_JSONFIELD_ENABLED", default=False)  # only postgresql
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", default="")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", default="")
