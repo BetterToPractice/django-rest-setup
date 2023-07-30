@@ -1,5 +1,6 @@
-import environ
 from pathlib import Path
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,10 +16,13 @@ environ.Env.read_env(ROOT_DIR / ".env")
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[
-    'localhost:8000',
-    'localhost:3000',
-])
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=[
+        "localhost:8000",
+        "localhost:3000",
+    ],
+)
 
 
 # Application definition
@@ -36,7 +40,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "django_filters",
-    'drf_spectacular',
+    "drf_spectacular",
     "social_django",
 ]
 
@@ -143,7 +147,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # pagination
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 25,
@@ -151,7 +155,7 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": (
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
-        'django_filters.rest_framework.DjangoFilterBackend',
+        "django_filters.rest_framework.DjangoFilterBackend",
     ),
     "SEARCH_PARAM": "q",
     "ORDERING_PARAM": "ordering",
@@ -168,14 +172,16 @@ CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND", default="")
 # https://drf-spectacular.readthedocs.io/en/latest/readme.html
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Project API',
-    'DESCRIPTION': 'project description',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    "TITLE": "Project API",
+    "DESCRIPTION": "project description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 # Social auth Django
 # https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
-SOCIAL_AUTH_JSONFIELD_ENABLED = env.str("SOCIAL_AUTH_JSONFIELD_ENABLED", default=False)  # only postgresql
+SOCIAL_AUTH_JSONFIELD_ENABLED = env.str(
+    "SOCIAL_AUTH_JSONFIELD_ENABLED", default=False
+)  # only postgresql
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", default="")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", default="")
