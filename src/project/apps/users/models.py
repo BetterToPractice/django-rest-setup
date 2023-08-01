@@ -27,3 +27,8 @@ class User(AbstractUser):
 class Group(DjangoGroup):
     class Meta:
         proxy = True
+        verbose_name = _("group")
+        verbose_name_plural = _("groups")
+
+    def __str__(self):
+        return self.name

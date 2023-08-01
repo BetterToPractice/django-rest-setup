@@ -180,8 +180,6 @@ SPECTACULAR_SETTINGS = {
 
 # Social auth Django
 # https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
-SOCIAL_AUTH_JSONFIELD_ENABLED = env.str(
-    "SOCIAL_AUTH_JSONFIELD_ENABLED", default=False
-)  # only postgresql
+SOCIAL_AUTH_JSONFIELD_ENABLED = env.str("SOCIAL_AUTH_JSONFIELD_ENABLED", default=False)  # only postgresql
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", default="")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", default="")

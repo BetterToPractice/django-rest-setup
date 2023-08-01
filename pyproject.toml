@@ -1,3 +1,19 @@
+[tool.flake8]
+ignore = ['E231', 'E241', 'DJ01', 'W503']
+per-file-ignores = [
+    '__init__.py:F401',
+]
+exclude = [
+    '.git',
+    '__pycache__',
+    'docs/',
+    'venv/',
+    'env/',
+    'migrations',
+]
+max-line-length = 119
+
+
 [tool.isort]
 profile = "black"
 src_paths = ["src"]
@@ -5,7 +21,7 @@ skip_glob = ["*/migrations/*"]
 
 
 [tool.black]
-line-length = 100
+line-length = 119
 include = '\.pyi?$'
 exclude = '''
 /(
