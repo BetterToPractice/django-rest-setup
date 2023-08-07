@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     "social_django",
+    "silk",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "silk.middleware.SilkyMiddleware",
 ]
 
 ROOT_URLCONF = "configs.urls"
@@ -83,6 +85,8 @@ DATABASES = {
     "default": env.db(),
 }
 
+# Authentication
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth
 
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
@@ -180,6 +184,14 @@ SPECTACULAR_SETTINGS = {
 
 # Social auth Django
 # https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+
 SOCIAL_AUTH_JSONFIELD_ENABLED = env.str("SOCIAL_AUTH_JSONFIELD_ENABLED", default=False)  # only postgresql
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", default="")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", default="")
+
+# Silk: Profiling
+# https://github.com/jazzband/django-silk
+
+SILKY_PYTHON_PROFILER = env.bool("SILKY_PYTHON_PROFILER", default=True)
+SILKY_AUTHENTICATION = env.bool("SILKY_AUTHENTICATION", default=True)
+SILKY_AUTHORISATION = env.bool("SILKY_AUTHORISATION", default=False)
