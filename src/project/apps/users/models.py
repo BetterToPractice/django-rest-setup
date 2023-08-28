@@ -57,3 +57,6 @@ class Profile(models.Model):
         db_table = "users_profiles"
         verbose_name = _("profile")
         verbose_name_plural = _("profiles")
+
+    def __str__(self):
+        return self.user.email
