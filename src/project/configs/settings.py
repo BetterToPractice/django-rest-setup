@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     # third-party
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt",
     "django_filters",
     "drf_spectacular",
     "social_django",
@@ -153,6 +155,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # pagination
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
@@ -200,4 +207,14 @@ SILKY_AUTHORISATION = env.bool("SILKY_AUTHORISATION", default=False)
 
 # Django Phone Number
 # https://django-phonenumber-field.readthedocs.io/en/latest/reference.html#settings
+
 PHONENUMBER_DEFAULT_REGION = "ID"
+
+# Django Rest Simple JWT
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=env.int("JWT_ACCESS_TOKEN_LIFETIME", default=5)),
+    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=env.int("JWT_REFRESH_TOKEN_LIFETIME", default=1440)),
+    "USER_AUTHENTICATION_RULE": "apps.auths.authentication.jwt_default_user_authentication_rule",
+}
