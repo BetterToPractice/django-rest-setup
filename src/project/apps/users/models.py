@@ -60,3 +60,23 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+class Address(models.Model):
+    name = models.CharField(_("name"), max_length=200)
+    street = models.TextField(_("street"))
+    is_default = models.BooleanField(_("is default?"), default=False)
+
+    user = models.ForeignKey(
+        "users.User",
+        related_name="addresses",
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        db_table = "users_addresses"
+        verbose_name = _("address")
+        verbose_name_plural = _("addresses")
+
+    def __str__(self):
+        return self.name
