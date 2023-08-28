@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     "social_django",
+    "phonenumber_field",
     "django_celery_beat",  # https://django-celery-beat.readthedocs.io/en/latest/
     "silk",
 ]
@@ -196,3 +197,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", d
 SILKY_PYTHON_PROFILER = env.bool("SILKY_PYTHON_PROFILER", default=True)
 SILKY_AUTHENTICATION = env.bool("SILKY_AUTHENTICATION", default=True)
 SILKY_AUTHORISATION = env.bool("SILKY_AUTHORISATION", default=False)
+
+# Django Phone Number
+# https://django-phonenumber-field.readthedocs.io/en/latest/reference.html#settings
+PHONENUMBER_DEFAULT_REGION = "ID"
