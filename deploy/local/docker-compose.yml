@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    container_name: "project_db"
+    image: "postgres:13-alpine"
+    environment:
+      - POSTGRES_USER=setup_user
+      - POSTGRES_PASSWORD=setup_password
+      - POSTGRES_DB=setup_db
+    volumes:
+      - django-rest-setup-database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  redis:
+    container_name: "project_redis"
+    image: "redis:6.2.6-alpine"
+    ports:
+      - '6379:6379'
+
+volumes:
+  django-rest-setup-database-data: {}

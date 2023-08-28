@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     "social_django",
+    "django_celery_beat",  # https://django-celery-beat.readthedocs.io/en/latest/
     "silk",
 ]
 
