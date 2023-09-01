@@ -1,0 +1,67 @@
+name: 'Test'
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  SECRET_KEY: foo_bar
+  DATABASE_URL: postgres://root:root@localhost:5432/my_db
+  DEBUG: on
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # operating system your code will run on
+
+    services:
+      db:
+        image: postgres:12
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
+          POSTGRES_DB: my_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+           python-version: 3.8
+      - run: pip install -r requirements.txt
+      - run: flake8 .
+      - run: black .
+      - run: isort .
+      - name: "Test & Coverage"
+        run: |
+          pytest -p no:warnings --cov=. --cov-report=json
+          export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
+          echo "total=$TOTAL" >> $GITHUB_ENV
+          echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
+      - name: "Make Badge"
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.GIST_ACCESS_TOKEN }}
+          gistID: ${{ secrets.GIST_ID }}
+          filename: covbadge_django_rest_setup.json
+          label: Coverage
+          message: ${{ env.total }}%
+          minColorRange: 50
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}

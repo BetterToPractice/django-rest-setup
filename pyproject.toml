@@ -40,3 +40,10 @@ exclude = '''
   | docs
 )/
 '''
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "configs.settings"
+pythonpath = [
+    "src/project",
+]
