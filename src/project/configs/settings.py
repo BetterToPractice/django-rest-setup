@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.users",
     "apps.auths",
+    "apps.blog",
     # third-party
     "corsheaders",
     "rest_framework",
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_celery_beat",  # https://django-celery-beat.readthedocs.io/en/latest/
     "silk",
+    "ckeditor",
+    "ckeditor_uploader",
 ]
 
 MIDDLEWARE = [
@@ -134,6 +137,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "runs/static"
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "runs/media"
+
+
+# Ckeditor
+# https://pypi.org/project/django-ckeditor/
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_CONFIGS = {}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

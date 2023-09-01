@@ -9,6 +9,7 @@ from drf_spectacular.views import (
 urlpatterns = [
     path("", include("apps.users.urls", namespace="users")),
     path("", include("apps.auths.urls", namespace="auths")),
+    path("", include("apps.blog.urls", namespace="blog")),
     # --------------------------------------------------------------------------------------
     # -- Admin and Auth --
     # --------------------------------------------------------------------------------------
@@ -24,5 +25,6 @@ urlpatterns = [
         name="swagger-ui",
     ),
     path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
     path("silk/", include("silk.urls", namespace="silk")),
 ]

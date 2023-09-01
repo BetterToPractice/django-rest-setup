@@ -267,4 +267,10 @@ pyrightconfig.json
 # idea
 .idea/
 
+# File ignore
+**/runs/media/*
+**/runs/static/*
+!**/runs/media/README.md
+!**/runs/static/README.md
+
 # End of https://www.toptal.com/developers/gitignore/api/django,python

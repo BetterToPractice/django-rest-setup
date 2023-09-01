@@ -11,6 +11,8 @@ django-filter==23.2
 django-environ==0.10.0
 django-silk==5.0.3
 django-phonenumber-field[phonenumberslite]==7.1.0
+django-autoslug==1.9.9
+django-ckeditor==6.7.0
 
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
