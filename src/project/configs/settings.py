@@ -208,7 +208,9 @@ SPECTACULAR_SETTINGS = {
 # Social auth Django
 # https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
 
-SOCIAL_AUTH_JSONFIELD_ENABLED = env.str("SOCIAL_AUTH_JSONFIELD_ENABLED", default=False)  # only postgresql
+SOCIAL_AUTH_JSONFIELD_ENABLED = env.str(
+    "SOCIAL_AUTH_JSONFIELD_ENABLED", default=False
+)  # only postgresql
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", default="")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", default="")
 
@@ -229,6 +231,8 @@ PHONENUMBER_DEFAULT_REGION = "ID"
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=env.int("JWT_ACCESS_TOKEN_LIFETIME", default=5)),
-    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=env.int("JWT_REFRESH_TOKEN_LIFETIME", default=1440)),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        minutes=env.int("JWT_REFRESH_TOKEN_LIFETIME", default=1440)
+    ),
     "USER_AUTHENTICATION_RULE": "apps.auths.authentication.jwt_default_user_authentication_rule",
 }

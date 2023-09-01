@@ -11,7 +11,7 @@ exclude = [
     'env/',
     'migrations',
 ]
-max-line-length = 119
+max-line-length = 100
 
 
 [tool.isort]
@@ -21,7 +21,7 @@ skip_glob = ["*/migrations/*"]
 
 
 [tool.black]
-line-length = 119
+line-length = 100
 include = '\.pyi?$'
 exclude = '''
 /(

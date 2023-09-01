@@ -52,7 +52,9 @@ class Post(models.Model):
 
 class PostCategory(models.Model):
     post = models.ForeignKey("blog.Post", on_delete=models.CASCADE, verbose_name=_("Product"))
-    category = models.ForeignKey("blog.Category", on_delete=models.CASCADE, verbose_name=_("Category"))
+    category = models.ForeignKey(
+        "blog.Category", on_delete=models.CASCADE, verbose_name=_("Category")
+    )
 
     class Meta:
         db_table = "blog_post_categories"
