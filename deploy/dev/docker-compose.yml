@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: "setup-django-rest-app"
+    build:
+      context: ./../..
+      dockerfile: deploy/dev/Dockerfile
+    command: ./deploy/start-app.sh
+    volumes:
+      - ../../src/project/:/usr/src/app/
+      - deploy_folder:/usr/src/app/deploy/
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:14-alpine
+    container_name: "setup-django-rest-db"
+    volumes:
+      - django_rest_setup_db:/var/lib/postgresql/data/
+    env_file:
+      - .env.db
+
+  redis:
+    container_name: "setup-django-rest-redis"
+    image: "redis:6.2.6-alpine"
+    ports:
+      - '6379:6379'
+
+  app_beat:
+    container_name: "setup-django-rest-beat"
+    build:
+      context: ./../..
+      dockerfile: deploy/dev/Dockerfile
+    command: ./deploy/start-beat.sh
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  app_worker:
+    container_name: "setup-django-rest-worker"
+    build:
+      context: ./../..
+      dockerfile: deploy/dev/Dockerfile
+    command: ./deploy/start-worker.sh
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  django_rest_setup_db: {}
+  deploy_folder: {}
