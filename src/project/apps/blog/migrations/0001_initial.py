@@ -50,8 +50,9 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "db_table": "blog_posts",
                 "ordering": ("-created_at",),
+                "verbose_name": "Post",
+                "verbose_name_plural": "Posts",
             },
         ),
         migrations.CreateModel(
