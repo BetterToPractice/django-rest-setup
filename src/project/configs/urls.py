@@ -6,6 +6,11 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+# Admin Config
+admin.site.site_header = "Project Admin"
+admin.site.site_title = "Project Admin Dashboard"
+admin.site.index_title = "Welcome to Project Admin Dashboard"
+
 urlpatterns = [
     path("", include("apps.users.urls", namespace="users")),
     path("", include("apps.auths.urls", namespace="auths")),
