@@ -32,4 +32,5 @@ urlpatterns = [
     path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("silk/", include("silk.urls", namespace="silk")),
+    path("", include("apps.auths.urls_auth", namespace="social")),
 ]

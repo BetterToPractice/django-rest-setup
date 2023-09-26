@@ -19,7 +19,7 @@ services:
       - redis
 
   db:
-    image: postgres:14-alpine
+    image: "postgres:14-alpine"
     container_name: "setup-django-rest-db"
     volumes:
       - django_rest_setup_db:/var/lib/postgresql/data/

@@ -97,8 +97,8 @@ DATABASES = {
 
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
     "social_core.backends.google.GoogleOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 

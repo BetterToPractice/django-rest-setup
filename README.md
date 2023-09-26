@@ -2,6 +2,7 @@ Django Rest Setup
 ==========================================
 [![Test & Deploy](https://github.com/BetterToPractice/django-rest-setup/actions/workflows/main.yml/badge.svg)](https://github.com/BetterToPractice/django-rest-setup/actions/workflows/main.yml)
 ![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/agung96tm/de1956fdfa1ea227f6e9cd051467b59a/raw/covbadge_django_rest_setup.json)
+![Docs](https://readthedocs.org/projects/django-rest-setup/badge/?version=latest)
 
 Getting started your django project using this repo.
 
