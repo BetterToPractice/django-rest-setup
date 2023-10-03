@@ -72,9 +72,10 @@ class LoginSocialSerializer(serializers.Serializer):
 
     @classmethod
     def send_email(cls, user):
-        register_mail.send(
-            receiver=user.email,
-            context={
-                "username": user.username,
-            },
-        )
+        if user.last_login is None:
+            register_mail.send(
+                receiver=user.email,
+                context={
+                    "username": user.username,
+                },
+            )
