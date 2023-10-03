@@ -236,3 +236,13 @@ SIMPLE_JWT = {
     ),
     "USER_AUTHENTICATION_RULE": "apps.auths.authentication.jwt_default_user_authentication_rule",
 }
+
+# Django Email
+# https://docs.djangoproject.com/en/4.2/topics/email/#smtp-backend
+EMAIL_BACKEND = env.str("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
+EMAIL_HOST = env.str("EMAIL_HOST", default="sandbox.smtp.mailtrap.io")
+EMAIL_PORT = env.int("EMAIL_PORT", default=25)
+EMAIL_HOST_USER = env.int("EMAIL_HOST_USER", default="user")
+EMAIL_HOST_PASSWORD = env.int("EMAIL_HOST_PASSWORD", default="password")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_DEFAULT_SENDER = env.bool("EMAIL_DEFAULT_SENDER", default="noreply@example.com")

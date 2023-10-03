@@ -1,0 +1,1 @@
+Hello, {{ name }}. You're successfully registered as user in our application. Thanks

@@ -1,3 +1,4 @@
+from apps.auths.mails import register_mail
 from apps.users.models import User
 from django.contrib.auth.models import update_last_login
 from django.db import transaction
@@ -22,7 +23,19 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = super().save(**kwargs)
         user.set_password(self.validated_data["password"])
         user.save()
+
+        self.send_email(user)
+
         return user
+
+    @classmethod
+    def send_email(cls, user):
+        register_mail.send(
+            receiver=user.email,
+            context={
+                "name": user.email,
+            },
+        )
 
 
 class LoginSocialSerializer(serializers.Serializer):
@@ -36,6 +49,8 @@ class LoginSocialSerializer(serializers.Serializer):
         data = super().validate(attrs)
         user = self.get_user_by_token(data)
         token = self.get_token(user)
+
+        self.send_email(user)
         update_last_login(None, user)
 
         return token
@@ -54,3 +69,12 @@ class LoginSocialSerializer(serializers.Serializer):
     def get_token(cls, user):
         token = RefreshToken.for_user(user)
         return {"refresh": str(token), "access": str(token.access_token)}
+
+    @classmethod
+    def send_email(cls, user):
+        register_mail.send(
+            receiver=user.email,
+            context={
+                "username": user.username,
+            },
+        )
