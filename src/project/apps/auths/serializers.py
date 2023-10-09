@@ -1,4 +1,5 @@
 from apps.auths.mails import register_mail
+from apps.auths.tokens import account_activation_token
 from apps.users.models import User
 from django.contrib.auth.models import update_last_login
 from django.db import transaction
@@ -32,10 +33,12 @@ class RegisterSerializer(serializers.ModelSerializer):
     def send_email(cls, user):
         register_mail.send(
             receiver=user.email,
-            context={
-                "name": user.email,
-            },
+            context={"name": user.email, "url": cls.generate_activate_url(user)},
         )
+
+    @classmethod
+    def generate_activate_url(cls, user):
+        return account_activation_token.generate_url(user)
 
 
 class LoginSocialSerializer(serializers.Serializer):

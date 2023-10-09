@@ -246,3 +246,7 @@ EMAIL_HOST_USER = env.int("EMAIL_HOST_USER", default="user")
 EMAIL_HOST_PASSWORD = env.int("EMAIL_HOST_PASSWORD", default="password")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 EMAIL_DEFAULT_SENDER = env.bool("EMAIL_DEFAULT_SENDER", default="noreply@example.com")
+
+# Frontend
+FRONTEND_BASE_URL = env.str("FRONTEND_BASE_URL", default="http://localhost:3000")
+FRONTEND_ACTIVATE_URL = FRONTEND_BASE_URL + "/activate/{uid}/{token}/"
