@@ -1,4 +1,8 @@
-from apps.auths.serializers import LoginSocialSerializer, RegisterSerializer
+from apps.auths.serializers import (
+    ActivateAccountSerializer,
+    LoginSocialSerializer,
+    RegisterSerializer,
+)
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -31,3 +35,12 @@ class LoginSocialAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data, backend=backend)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+
+
+class ActivateAccountAPIView(generics.CreateAPIView):
+    serializer_class = ActivateAccountSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(status=status.HTTP_202_ACCEPTED)
