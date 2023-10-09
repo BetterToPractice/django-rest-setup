@@ -1,1 +1,1 @@
-Hello, {{ name }}. You're successfully registered as user in our application. Thanks
+Hello, {{ name }}. open the link to activate your account: {{ url }}. Thanks

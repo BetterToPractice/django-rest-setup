@@ -11,6 +11,7 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
     avatar = models.ImageField(_("avatar"), null=True, blank=True, upload_to="users/users")
+    is_email_confirmed = models.BooleanField(_("is email confirmed?"), default=False)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
