@@ -82,3 +82,29 @@ class LoginSocialSerializer(serializers.Serializer):
                     "username": user.username,
                 },
             )
+
+
+class ActivateAccountSerializer(serializers.ModelSerializer):
+    uid = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = (
+            "uid",
+            "token",
+        )
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        user, is_valid = account_activation_token.validate(uid=data["uid"], token=data["token"])
+        if not is_valid:
+            raise serializers.ValidationError(
+                "Fail to activate account. Link has been expired or already used"
+            )
+
+        user.is_email_confirmed = True
+        user.is_active = True
+        user.save()
+
+        return data
